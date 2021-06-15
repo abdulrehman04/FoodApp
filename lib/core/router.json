@@ -1,0 +1,220 @@
+{
+    "last_updated": "Mon, 01 Mar 2021 16:45:35 GMT",
+    "routes": [
+        {
+            "file_path": "views/splash_screen/splash_screen_view.dart",
+            "route_name": "splash_screenViewRoute",
+            "view_name": "SplashScreenView"
+        },
+        {
+            "file_path": "views/login_screen/login_screen_view.dart",
+            "route_name": "login_screenViewRoute",
+            "view_name": "LoginScreenView"
+        },
+        {
+            "file_path": "views/signup_screen/signup_screen_view.dart",
+            "route_name": "signup_screenViewRoute",
+            "view_name": "SignupScreenView"
+        },
+        {
+            "file_path": "views/bottom_bar/bottom_bar_view.dart",
+            "route_name": "bottom_barViewRoute",
+            "view_name": "BottomBarView"
+        },
+        {
+            "file_path": "views/time_screen/time_screen_view.dart",
+            "route_name": "time_screenViewRoute",
+            "view_name": "TimeScreenView"
+        },
+        {
+            "file_path": "views/home_screen/home_screen_view.dart",
+            "route_name": "home_screenViewRoute",
+            "view_name": "HomeScreenView"
+        },
+        {
+            "file_path": "views/welcome_screen/welcome_screen_view.dart",
+            "route_name": "welcome_screenViewRoute",
+            "view_name": "WelcomeScreenView"
+        },
+        {
+            "file_path": "views/my_reward_screen/my_reward_screen_view.dart",
+            "route_name": "my_reward_screenViewRoute",
+            "view_name": "MyRewardScreenView"
+        },
+        {
+            "file_path": "views/menu_screen/menu_screen_view.dart",
+            "route_name": "menu_screenViewRoute",
+            "view_name": "MenuScreenView"
+        },
+        {
+            "file_path": "views/my_information_screen/my_information_screen_view.dart",
+            "route_name": "my_information_screenViewRoute",
+            "view_name": "MyInformationScreenView"
+        },
+        {
+            "file_path": "views/profile_screen/profile_screen_view.dart",
+            "route_name": "profile_screenViewRoute",
+            "view_name": "ProfileScreenView"
+        },
+        {
+            "file_path": "views/past_orders_screen/past_orders_screen_view.dart",
+            "route_name": "past_orders_screenViewRoute",
+            "view_name": "PastOrdersScreenView"
+        },
+        {
+            "file_path": "views/near_by_screen/near_by_screen_view.dart",
+            "route_name": "near_by_screenViewRoute",
+            "view_name": "NearByScreenView"
+        },
+        {
+            "file_path": "views/choose_cafe_screen/choose_cafe_screen_view.dart",
+            "route_name": "choose_cafe_screenViewRoute",
+            "view_name": "ChooseCafeScreenView"
+        },
+        {
+            "file_path": "views/get_coffee_screen/get_coffee_screen_view.dart",
+            "route_name": "get_coffee_screenViewRoute",
+            "view_name": "GetCoffeeScreenView"
+        },
+        {
+            "file_path": "views/no_account_screen/no_account_screen_view.dart",
+            "route_name": "no_account_screenViewRoute",
+            "view_name": "NoAccountScreenView"
+        },
+        {
+            "file_path": "views/reset_password_screen/reset_password_screen_view.dart",
+            "route_name": "reset_password_screenViewRoute",
+            "view_name": "ResetPasswordScreenView"
+        },
+        {
+            "file_path": "views/communication_preference_screen/communication_preference_screen_view.dart",
+            "route_name": "communication_preference_screenViewRoute",
+            "view_name": "CommunicationPreferenceScreenView"
+        },
+        {
+            "file_path": "views/locate_account_screen/locate_account_screen_view.dart",
+            "route_name": "locate_account_screenViewRoute",
+            "view_name": "LocateAccountScreenView"
+        },
+        {
+            "file_path": "views/look_up/look_up_view.dart",
+            "route_name": "look_upViewRoute",
+            "view_name": "LookUpView"
+        },
+        {
+            "file_path": "views/past_orders/past_orders_view.dart",
+            "route_name": "past_ordersViewRoute",
+            "view_name": "PastOrdersView"
+        },
+        {
+            "file_path": "views/past_order_screen_1/past_order_screen_1_view.dart",
+            "route_name": "past_order_screen_1ViewRoute",
+            "view_name": "PastOrderScreen1View"
+        },
+        {
+            "file_path": "views/payment_screen/payment_screen_view.dart",
+            "route_name": "payment_screenViewRoute",
+            "view_name": "PaymentScreenView"
+        },
+        {
+            "file_path": "views/privacy_policy_screen/privacy_policy_screen_view.dart",
+            "route_name": "privacy_policy_screenViewRoute",
+            "view_name": "PrivacyPolicyScreenView"
+        },
+        {
+            "file_path": "views/profile_and_settings_screen/profile_and_settings_screen_view.dart",
+            "route_name": "profile_and_settings_screenViewRoute",
+            "view_name": "ProfileAndSettingsScreenView"
+        },
+        {
+            "file_path": "views/gift_card_screen/gift_card_screen_view.dart",
+            "route_name": "gift_card_screenViewRoute",
+            "view_name": "GiftCardScreenView"
+        },
+        {
+            "file_path": "views/social_accounts_screen/social_accounts_screen_view.dart",
+            "route_name": "social_accounts_screenViewRoute",
+            "view_name": "SocialAccountsScreenView"
+        },
+        {
+            "file_path": "views/terms_of_use_screen/terms_of_use_screen_view.dart",
+            "route_name": "terms_of_use_screenViewRoute",
+            "view_name": "TermsOfUseScreenView"
+        },
+        {
+            "file_path": "views/taste_preferences_screen/taste_preferences_screen_view.dart",
+            "route_name": "taste_preferences_screenViewRoute",
+            "view_name": "TastePreferencesScreenView"
+        },
+        {
+            "file_path": "views/taste_preferences_screen_2/taste_preferences_screen_2_view.dart",
+            "route_name": "taste_preferences_screen_2ViewRoute",
+            "view_name": "TastePreferencesScreen2View"
+        },
+        {
+            "file_path": "views/rapid_pickup_screen_2/rapid_pickup_screen_2_view.dart",
+            "route_name": "rapid_pickup_screen_2ViewRoute",
+            "view_name": "RapidPickupScreen2View"
+        },
+        {
+            "file_path": "views/add_credit_card_screen/add_credit_card_screen_view.dart",
+            "route_name": "add_credit_card_screenViewRoute",
+            "view_name": "AddCreditCardScreenView"
+        },
+        {
+            "file_path": "views/add_gift_card_screen/add_gift_card_screen_view.dart",
+            "route_name": "add_gift_card_screenViewRoute",
+            "view_name": "AddGiftCardScreenView"
+        },
+        {
+            "file_path": "views/beverage_screen/beverage_screen_view.dart",
+            "route_name": "beverage_screenViewRoute",
+            "view_name": "BeverageScreenView"
+        },
+        {
+            "file_path": "views/cart_screen/cart_screen_view.dart",
+            "route_name": "cart_screenViewRoute",
+            "view_name": "CartScreenView"
+        },
+        {
+            "file_path": "views/modify_screen/modify_screen_view.dart",
+            "route_name": "modify_screenViewRoute",
+            "view_name": "ModifyScreenView"
+        },
+        {
+            "file_path": "views/order_detail_screen/order_detail_screen_view.dart",
+            "route_name": "order_detail_screenViewRoute",
+            "view_name": "OrderDetailScreenView"
+        },
+        {
+            "file_path": "views/arrived_for_order_screen/arrived_for_order_screen_view.dart",
+            "route_name": "arrived_for_order_screenViewRoute",
+            "view_name": "ArrivedForOrderScreenView"
+        },
+        {
+            "file_path": "views/item_detail_screen/item_detail_screen_view.dart",
+            "route_name": "item_detail_screenViewRoute",
+            "view_name": "ItemDetailScreenView"
+        },
+        {
+            "file_path": "views/cart_details_screen/cart_details_screen_view.dart",
+            "route_name": "cart_details_screenViewRoute",
+            "view_name": "CartDetailsScreenView"
+        },
+        {
+            "file_path": "views/payment_options_screen/payment_options_screen_view.dart",
+            "route_name": "payment_options_screenViewRoute",
+            "view_name": "PaymentOptionsScreenView"
+        },
+        {
+            "file_path": "views/my_subscription_screen/my_subscription_screen_view.dart",
+            "route_name": "my_subscription_screenViewRoute",
+            "view_name": "MySubscriptionScreenView"
+        },
+        {
+            "file_path": "views/communication_preference_dialogue/communication_preference_dialogue_view.dart",
+            "route_name": "communication_preference_dialogueViewRoute",
+            "view_name": "CommunicationPreferenceDialogueView"
+        }
+    ]
+}
