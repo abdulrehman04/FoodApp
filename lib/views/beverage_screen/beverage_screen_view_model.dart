@@ -1,16 +1,19 @@
+import 'package:FoodApp/Models/FoodItem.dart';
+import 'package:FoodApp/Models/NutritionalInfo.dart';
+import 'package:FoodApp/Models/sizeAndPrice.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
 import 'package:stacked/stacked.dart';
 import 'package:FoodApp/core/logger.dart';
+import 'package:FoodApp/Models/Category.dart';
 
 class BeverageScreenViewModel extends BaseViewModel {
   Logger log;
   List foods;
-  Map category;
+  Category category;
   String categoryImage;
   String subtitle;
-  List<DocumentSnapshot> foodDetails = [];
+  List<FoodItem> foodDetails = [];
   DocumentSnapshot restaurant;
   Map<String, List<String>> beverages = {
     'coffee1.png': [
@@ -33,16 +36,27 @@ class BeverageScreenViewModel extends BaseViewModel {
 
   BeverageScreenViewModel({this.category}) {
     this.log = getLogger(this.runtimeType.toString());
-    categoryImage = category['image'];
-    subtitle = category['subtitle'];
-    foods = category['foods'];
+    foods = category.Foods;
     getFoods();
   }
 
   void getFoods() {
     foods.forEach((element) {
       FirebaseFirestore.instance.collection('FoodItems').doc(element).get().then((value){
-        foodDetails.add(value);
+
+        Map sizeAndPrices = value.get('sizeAndPrice');
+        List<sizeAndPrice> SAP = [];
+        sizeAndPrices.forEach((key, value) {
+          SAP.add(sizeAndPrice(size: key, price: value));
+        });
+
+        Map nutritionalInfo = value.get('nutritionalInfo');
+        List<NutritionalInfo> nutrition = [];
+        nutritionalInfo.forEach((key, value) {
+          nutrition.add(NutritionalInfo(name: key, quantity: value));
+        });
+
+        foodDetails.add(FoodItem(image: value.get('image'), name: value.get('name'), about: value.get('about'), allergens: value.get('allergens'), detailedIngredient: value.get('detailedIngredient'), nutritionalInfo: nutrition, SAP: SAP, tax: value.get('tax'), id: value.id));
         notifyListeners();
       });
     });

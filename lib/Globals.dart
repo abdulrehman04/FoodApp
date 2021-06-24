@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:FoodApp/Models/Category.dart';
+import 'package:FoodApp/Models/Delivery%20Options.dart';
+import 'package:FoodApp/Models/Restaurant.dart';
 import 'package:FoodApp/Models/cartItem.dart';
-import 'package:FoodApp/views/bottom_bar/bottom_bar_view.dart';
 import 'package:android_intent/android_intent.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,29 +15,35 @@ import 'Models/Order.dart';
 //Variables
 final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
 Position currentPosition = Position(latitude: 28.3001, longitude: 70.1077);
-List<DocumentSnapshot> restaurants=[];
+List<Restaurant> restaurants=[];
 int count = 0;
 BuildContext currentContext;
 bool locationEnabled = false;
-List<Map> restaurantsOrderedByDeliveryOptions = [{
-  'option': 'In-Person\\nPickup',
-  'comment': 'Pickup your\\norder at your\\nfavourite cafe.',
-  'restaurants':[],
-},{
-  'option': 'Delivery',
-  'comment': "Your Food will\\nbe deliverd hot\\nor it's free",
-  'restaurants':[],
-},
-  {
-    'option': 'Catering',
-    'comment': 'Big or small\\nGroups, We fit\\nyour size.',
-    'restaurants':[],
-  },
-  {
-    'option': 'Curbside\nPickup',
-    'comment': 'Let us know\nwhen you\nare here.',
-    'restaurants':[],
-  }];
+
+List <DeliveryOptions> restaurantsOrderedByDeliveryOptions = [
+  DeliveryOptions(
+    options: 'In-Person\\nPickup',
+    comment: 'Pickup your\\norder at your\\nfavourite cafe.',
+    restaurants:[],
+  ),
+  DeliveryOptions(
+    options: 'Delivery',
+    comment: "Your Food will\\nbe deliverd hot\\nor it's free",
+    restaurants:[],
+  ),
+  DeliveryOptions(
+    options: 'Catering',
+    comment: 'Big or small\\nGroups, We fit\\nyour size.',
+    restaurants:[],
+  ),
+  DeliveryOptions(
+    options: 'Curbside\nPickup',
+    comment: 'Let us know\nwhen you\nare here.',
+    restaurants:[],
+  ),
+
+];
+
 Order currentOrder;
 bool opened = false;
 List<CartItem> cart = [];
@@ -92,7 +100,6 @@ Future _checkGps() async {
                   FlatButton(child: Text('Ok'),
                       onPressed: () {
                         Navigator.pop(context);
-//                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>BottomBarView()), (route) => false);
                       }),
                 ],
               );
@@ -107,14 +114,6 @@ Future _checkGps() async {
   }
 }
 
-Future _gpsService() async {
-  if (!(await Geolocator().isLocationServiceEnabled())) {
-    _checkGps();
-    return null;
-  } else
-    return true;
-}
-
 getNearbyRestaurants() async {
   if(!(await Geolocator().isLocationServiceEnabled())){
     _checkGps();
@@ -127,14 +126,14 @@ getNearbyRestaurants() async {
 void getLocationProceeding() {
   geolocator.getCurrentPosition().then((event){
     if(currentPosition == null){
-      currentPosition = Position(latitude: 28.3001, longitude: 70.1077);
-//      currentPosition = event;
+      currentPosition = Position(latitude: 28.3001, longitude: 70.1077);  //Disable this in realtime scenarios
+//      currentPosition = event;   Enable this in realtime scenarios
       _searchRestaurantsInRange();
     }
     else{
       if(event.latitude != currentPosition.latitude || event.longitude != currentPosition.longitude){
-//        currentPosition = event;
-        currentPosition = Position(latitude: 28.3001, longitude: 70.1077);
+//        currentPosition = event;    Enable this in realtime scenarios
+        currentPosition = Position(latitude: 28.3001, longitude: 70.1077);  //Disable this in realtime scenarios
         _searchRestaurantsInRange();
       }
     }
@@ -147,14 +146,19 @@ showSnack(BuildContext context, text){
 
 _searchRestaurantsInRange() async {
   restaurants = [];
-  print('Called');
   await FirebaseFirestore.instance.collection('Restaurants').get().then((value){
     value.docs.forEach((element) {
       var lat = element.data()['lat'];
       var long = element.data()['long'];
       if(_is10Miles(lat, long)){
-        if(!restaurants.any((doc) => doc.id == element.id)){
-          restaurants.add(element);
+        if(!restaurants.any((res) => res.id == element.id)){
+          Map DBcategories = Map.from(element.get('categories'));
+          List <Category> cats = [];
+          DBcategories.forEach((key, value) {
+            cats.add(Category(name: key, image: value['image'], Foods: value['foods'], subtitle: value['subtitle'],));
+          });
+          Restaurant restaurant = Restaurant(id: element.id,name: element.get('name'), lng: element.get('long'), lat: element.get('lat'), address: element.get('address'), categories: cats, deliveryOptions: element.get('deliveryOptions'));
+          restaurants.add(restaurant);
         }
       }
     });
@@ -187,14 +191,14 @@ _searchRestaurantsInRange() async {
 
 void _getRestaurantsForEachDeliveryOption() {
   restaurantsOrderedByDeliveryOptions.forEach((option) {
-    List rests = [];
+    List<Restaurant> rests = [];
     restaurants.forEach((rest) {
-      Map restaurantOptions = Map.from(rest.data())['deliveryOptions'];
-      if(restaurantOptions.containsKey(option['option'])){
+      List restaurantOptions = rest.deliveryOptions;
+      if(restaurantOptions.contains(option.options)){
         rests.add(rest);
       }
     });
-    option['restaurants'] = rests;
+    option.restaurants = rests;
   });
 }
 

@@ -86,8 +86,8 @@ class CartScreenView extends StatelessWidget {
                         Column(
                           children: cart.map((e){
                             return CartCard(
-                              path: "${e.item.get('image')}",
-                              title: "${e.item.get('name')}",
+                              path: "${e.item.image}",
+                              title: "${e.item.name}",
                               subtitle: "",
                               addtap: (){
                                 viewModel.addQuantity(cart.indexOf(e));

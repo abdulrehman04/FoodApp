@@ -1,3 +1,4 @@
+import 'package:FoodApp/Models/Restaurant.dart';
 import 'package:FoodApp/theme/css.dart';
 import 'package:FoodApp/views/beverage_screen/beverage_screen_view.dart';
 import 'package:FoodApp/widgets/smart_widgets/menu_list_tile.dart';
@@ -10,7 +11,7 @@ import 'package:stacked/stacked.dart';
 import 'menu_screen_view_model.dart';
 
 class MenuScreenView extends StatefulWidget {
-  DocumentSnapshot restaurant;
+  Restaurant restaurant;
   MenuScreenView(this.restaurant);
 
   @override
@@ -19,8 +20,8 @@ class MenuScreenView extends StatefulWidget {
 
 class _MenuScreenViewState extends State<MenuScreenView> {
 
-  List categories = [];
-  List values = [];
+//  List categories = [];
+//  List values = [];
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<MenuScreenViewModel>.reactive(
@@ -58,17 +59,17 @@ class _MenuScreenViewState extends State<MenuScreenView> {
                           children: [
                             Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: categories.map((e){
+                              children: widget.restaurant.categories.map((e){
                                 return Column(
                                   children: [
                                     MenuListTile(
                                       icon: Icons.food_bank,
-                                      title: e,
+                                      title: e.name,
                                       onpressed: () {
 //                                        print(values);
                                         Navigator.push(context,
                                             MaterialPageRoute(builder: (context) {
-                                              return BeverageScreenView(values[categories.indexOf(e)], e);
+                                              return BeverageScreenView(e);
                                             }));
                                       },
                                     ),
@@ -215,13 +216,13 @@ class _MenuScreenViewState extends State<MenuScreenView> {
   @override
   void initState() {
     if(widget.restaurant!=null){
-      Map DBcategories = Map.from(widget.restaurant.get('categories'));
-      DBcategories.forEach((key, value) {
-        values.add(value);
-        setState(() {
-          categories.add(key);
-        });
-      });
+//      Map DBcategories = Map.from(widget.restaurant.get('categories'));
+//      DBcategories.forEach((key, value) {
+//        values.add(value);
+//        setState(() {
+//          categories.add(key);
+//        });
+//      });
     }
   }
 }

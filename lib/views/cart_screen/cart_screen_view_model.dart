@@ -57,20 +57,37 @@ class CartScreenViewModel extends BaseViewModel {
                       height: 20,
                     ),
                     Column(
-                      children: options.map((e){
+                      children: restaurantsOrderedByDeliveryOptions.map((e){
                         return NewOrderOption(
-                          leading: e.replaceAll("\\n", "\n"),
-                          text: "${comment[options.indexOf(e)].replaceAll("\\n", "\n")}",
+                          leading: e.options.replaceAll("\\n", "\n"),
+                          text: "${e.comment.replaceAll("\\n", "\n")}",
                           image: "assets/pickup.png",
                           onpressed: () {
-
                             Navigator.pop(context);
-                            currentOrder.selectedMethod = e.replaceAll("\\n", "\n");
+                            currentOrder.selectedMethod = e.options.replaceAll("\\n", "\n");
                             notifyListeners();
                           },
                         );
                       }).toList(),
                     ),
+//                    NewOrderOption(
+//                      leading: "Delivery",
+//                      text: "Your Food will\nbe deliverd hot\nor it's free,",
+//                      image: "assets/pickup.png",
+//                      onpressed: () {},
+//                    ),
+//                    NewOrderOption(
+//                      leading: "Catering",
+//                      text: "Big or small\nGroups, We fit\nyour size.",
+//                      image: "assets/pickup.png",
+//                      onpressed: () {},
+//                    ),
+//                    NewOrderOption(
+//                      leading: "Curbside\nPickup",
+//                      text: "Let us know\nwhen you\nare here.",
+//                      image: "assets/pickup.png",
+//                      onpressed: () {},
+//                    ),
                   ],
                 ),
               ),
@@ -93,13 +110,13 @@ class CartScreenViewModel extends BaseViewModel {
   }
 
   CartScreenViewModel(this.beverageScreenViewModel) {
-    availableMethods = currentOrder.selectedRestaurant.get('deliveryOptions');
+//    availableMethods = currentOrder.selectedRestaurant.get('deliveryOptions');
     this.log = getLogger(this.runtimeType.toString());
 
-    availableMethods.forEach((key, value) {
-      options.add(key);
-      comment.add(value);
-    });
+//    availableMethods.forEach((key, value) {
+//      options.add(key);
+//      comment.add(value);
+//    });
     notifyListeners();
   }
 
@@ -125,7 +142,7 @@ class CartScreenViewModel extends BaseViewModel {
     var total = 0.0;
     cart.forEach((element) {
       print(element.size);
-      total += (element.unitPrice*element.quantity) + (double.parse(element.item.get('tax'))*element.quantity);
+      total += (element.unitPrice*element.quantity) + (double.parse(element.item.tax)*element.quantity);
     });
 
     return total.toStringAsPrecision(4);
@@ -135,7 +152,7 @@ class CartScreenViewModel extends BaseViewModel {
     var total = 0.0;
     cart.forEach((element) {
       print(element.size);
-      total += (double.parse(element.item.get('tax'))*element.quantity);
+      total += (double.parse(element.item.tax)*element.quantity);
     });
 
     return total;

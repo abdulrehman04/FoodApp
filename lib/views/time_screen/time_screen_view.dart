@@ -1,4 +1,5 @@
 import 'package:FoodApp/Globals.dart';
+import 'package:FoodApp/Models/Restaurant.dart';
 import 'package:FoodApp/theme/css.dart';
 import 'package:FoodApp/views/menu_screen/menu_screen_view.dart';
 import 'package:FoodApp/widgets/smart_widgets/time_button.dart';
@@ -11,7 +12,7 @@ import 'package:stacked/stacked.dart';
 import 'time_screen_view_model.dart';
 
 class TimeScreenView extends StatefulWidget {
-  DocumentSnapshot restaurant;
+  Restaurant restaurant;
   TimeScreenView(this.restaurant);
   @override
   _TimeScreenViewState createState() => _TimeScreenViewState();

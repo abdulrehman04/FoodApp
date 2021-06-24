@@ -1,9 +1,10 @@
+import 'package:FoodApp/Models/Restaurant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'cartItem.dart';
 
 class Order{
-  DocumentSnapshot selectedRestaurant;
+  Restaurant selectedRestaurant;
   String restaurantId, selectedMethod, from;
   List<CartItem> cart;
   bool later;

@@ -161,7 +161,7 @@ class Router {
         return MaterialPageRoute(
             builder: (_) => view32.AddGiftCardScreenView());
       case beverageScreenViewRoute:
-        return MaterialPageRoute(builder: (_) => view33.BeverageScreenView(null, null));
+        return MaterialPageRoute(builder: (_) => view33.BeverageScreenView(null));
       case cartScreenViewRoute:
         return MaterialPageRoute(builder: (_) => view34.CartScreenView(null));
       case modifyScreenViewRoute:

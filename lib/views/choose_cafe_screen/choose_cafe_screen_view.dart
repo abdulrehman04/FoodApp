@@ -2,7 +2,6 @@ import 'package:FoodApp/Globals.dart';
 import 'package:FoodApp/views/time_screen/time_screen_view.dart';
 import 'package:FoodApp/widgets/smart_widgets/location_card.dart';
 import 'package:FoodApp/widgets/smart_widgets/order_button.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,16 +9,9 @@ import 'package:latlong/latlong.dart';
 import 'package:stacked/stacked.dart';
 import 'choose_cafe_screen_view_model.dart';
 
-class ChooseCafeScreenView extends StatefulWidget {
-  List restaurants;
+class ChooseCafeScreenView extends StatelessWidget {
+  final List restaurants;
   ChooseCafeScreenView(this.restaurants);
-
-  @override
-  _ChooseCafeScreenViewState createState() => _ChooseCafeScreenViewState();
-}
-
-class _ChooseCafeScreenViewState extends State<ChooseCafeScreenView> {
-
 
   @override
   Widget build(BuildContext context) {
@@ -59,11 +51,11 @@ class _ChooseCafeScreenViewState extends State<ChooseCafeScreenView> {
                     hintText: "Search for and address, city or zip",
                     border: OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Color(0xFF181b1e), width:  ScreenUtil().setWidth(32)),
+                        BorderSide(color: Color(0xFF181b1e), width:  ScreenUtil().setWidth(32)),
                         borderRadius: BorderRadius.circular(25.0)),
                     focusedBorder: OutlineInputBorder(
                       borderSide:
-                          BorderSide(color: Color(0xFF181b1e), width:  ScreenUtil().setWidth(32)),
+                      BorderSide(color: Color(0xFF181b1e), width:  ScreenUtil().setWidth(32)),
                       borderRadius: BorderRadius.circular(25.0),
                     ),
                   ),
@@ -89,16 +81,16 @@ class _ChooseCafeScreenViewState extends State<ChooseCafeScreenView> {
                   height: ScreenUtil().setHeight(20),
                 ),
                 Expanded(
-                  child: widget.restaurants.length==0?Container(child: Center(child: Text('No Restaurants for selected option in your area', style: GoogleFonts.abel(
+                  child: restaurants.length==0?Container(child: Center(child: Text('No Restaurants for selected option in your area', style: GoogleFonts.abel(
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
                       fontSize:  ScreenUtil().setSp(18)),),),):ListView(
                     children: [
                       Column(
-                        children: widget.restaurants.map<Widget>((e){
+                        children: restaurants.map<Widget>((e){
                           return LocationCard(
-                            title: e.get('name'),
-                            subtitle: "${getDistance(e.get('lat'), e.get('long'))} mi - ${e.get('address')}",
+                            title: e.name,
+                            subtitle: "${getDistance(e.lat, e.lng)} mi - ${e.address}",
                             check: false,
                             onpressed: () {
                               currentOrder.restaurantId = e.id;
@@ -166,6 +158,7 @@ class _ChooseCafeScreenViewState extends State<ChooseCafeScreenView> {
     );
   }
 }
+
 
 getDistance(double lat, double long) {
   Distance distance = new Distance();

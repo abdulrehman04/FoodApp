@@ -1,10 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:FoodApp/Models/FoodItem.dart';
 
 class CartItem{
   int quantity;
   String size, specialInstructions, id;
   double unitPrice;
-  DocumentSnapshot item;
+  FoodItem item;
 
 
   CartItem({this.quantity, this.item, this.size, this.unitPrice, this.specialInstructions, this.id});

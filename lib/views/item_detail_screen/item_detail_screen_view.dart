@@ -1,3 +1,4 @@
+import 'package:FoodApp/Models/FoodItem.dart';
 import 'package:FoodApp/theme/css.dart';
 import 'package:FoodApp/views/beverage_screen/beverage_screen_view_model.dart';
 import 'package:FoodApp/widgets/smart_widgets/pickup_button.dart';
@@ -13,7 +14,7 @@ import 'package:FoodApp/Globals.dart';
 class ItemDetailScreenView extends StatelessWidget {
   BeverageScreenViewModel beverageModel;
   ItemDetailScreenView(this.item, this.beverageModel);
-  DocumentSnapshot item;
+  FoodItem item;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,7 @@ class ItemDetailScreenView extends StatelessWidget {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       fit: BoxFit.fill,
-                      image: NetworkImage(item.get('image')),
+                      image: NetworkImage(item.image),
                     ),
                   ),
                 ),
@@ -50,7 +51,7 @@ class ItemDetailScreenView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              item.get('name'),
+                              item.name,
                               style: GoogleFonts.montserrat(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -69,7 +70,7 @@ class ItemDetailScreenView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              '\$${viewModel.prices[viewModel.selectedSize]}',
+                              '\$${viewModel.selectedSize.price}',
                               style: GoogleFonts.montserrat(
                                 color: themecolor,
                                 fontSize: 15,
@@ -123,7 +124,7 @@ class ItemDetailScreenView extends StatelessWidget {
                                         child: DropdownButtonHideUnderline(
                                           child: DropdownButton(
                                               isExpanded: true,
-                                              value: viewModel.selectedDropdownSize,
+                                              value: viewModel.selectedSize,
                                               style: GoogleFonts.montserrat(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w500,
@@ -133,12 +134,12 @@ class ItemDetailScreenView extends StatelessWidget {
                                               hint: Text('Select Size', style: TextStyle(color: Colors.white),),
                                               onChanged: (val){
 //                                                sst((){
-                                                  viewModel.selectedDropdownSize = val;
+                                                  viewModel.selectedSize = val;
                                                   viewModel.notifyListeners();
 //                                                });
                                               },
-                                              items: viewModel.sizes.map((e){
-                                                return DropdownMenuItem(child: Text(e), value: e,);
+                                              items: viewModel.item.SAP.map((e){
+                                                return DropdownMenuItem(child: Text(e.size), value: e,);
                                               }).toList()
                                           ),
                                         ),
@@ -261,7 +262,7 @@ class ItemDetailScreenView extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        item.get('about'),
+                        item.about,
                         style: GoogleFonts.montserrat(
                             color: Colors.white,
                             fontSize: 14,
@@ -281,7 +282,7 @@ class ItemDetailScreenView extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        item.get('detailedIngredient'),
+                        item.detailedIngredient,
                         style: GoogleFonts.montserrat(
                             color: Colors.white,
                             fontSize: 14,
@@ -383,7 +384,7 @@ class ItemDetailScreenView extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        item.get('allergens'),
+                        item.allergens,
                         style: GoogleFonts.montserrat(
                             color: Colors.white,
                             fontSize: 14,
@@ -398,11 +399,11 @@ class ItemDetailScreenView extends StatelessWidget {
                           children: [
                             PickUpButton(
                               text:
-                                  'Add To Order \$${viewModel.prices[viewModel.selectedSize]}',
+                                  'Add To Order \$${viewModel.selectedSize.price}',
                               colour: themecolor,
                               textColor: Colors.black,
                               onpressed: () {
-                                if(viewModel.quantity>0 && viewModel.selectedDropdownSize != null){
+                                if(viewModel.quantity>0 && viewModel.selectedSize != null){
                                   viewModel.addToCart();
                                   showSnack(context, 'Item Added to Cart');
                                   Navigator.pop(context);

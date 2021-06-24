@@ -60,16 +60,16 @@ class HomeScreenViewModel extends BaseViewModel {
                     Column(
                       children: restaurantsOrderedByDeliveryOptions.map((e){
                         return NewOrderOption(
-                          leading: e['option'].replaceAll("\\n", "\n"),
-                          text: "${e['comment'].replaceAll("\\n", "\n")}",
+                          leading: e.options.replaceAll("\\n", "\n"),
+                          text: "${e.comment.replaceAll("\\n", "\n")}",
                           image: "assets/pickup.png",
                           onpressed: () {
                             Navigator.pop(context);
-                            currentOrder.selectedMethod = e['option'].replaceAll("\\n", "\n");
-                            print(e['restaurants']);
+                            currentOrder.selectedMethod = e.options.replaceAll("\\n", "\n");
+                            print(e.restaurants);
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                                  return ChooseCafeScreenView(e['restaurants']);
+                                  return ChooseCafeScreenView(e.restaurants);
                                 }));
                           },
                         );

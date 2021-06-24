@@ -1,4 +1,5 @@
 import 'package:FoodApp/Globals.dart';
+import 'package:FoodApp/Models/Category.dart';
 import 'package:FoodApp/theme/css.dart';
 import 'package:FoodApp/views/cart_screen/cart_screen_view.dart';
 import 'package:FoodApp/views/item_detail_screen/item_detail_screen_view.dart';
@@ -11,9 +12,8 @@ import 'package:stacked/stacked.dart';
 import 'beverage_screen_view_model.dart';
 
 class BeverageScreenView extends StatelessWidget {
-  String name;
-  Map category;
-  BeverageScreenView(this.category, this.name);
+  Category category;
+  BeverageScreenView(this.category);
 
 
   @override
@@ -24,7 +24,7 @@ class BeverageScreenView extends StatelessWidget {
           backgroundColor: Colors.black,
           appBar: AppBar(
             backgroundColor: Colors.black,
-            title: Text("$name", style: GoogleFonts.montserrat()),
+            title: Text("${category.name}", style: GoogleFonts.montserrat()),
           ),
           body: Column(
             children: [
@@ -32,7 +32,7 @@ class BeverageScreenView extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: NetworkImage(viewModel.categoryImage),
+                        image: NetworkImage(category.image),
                         fit: BoxFit.cover),
                   ),
                 ),
@@ -48,7 +48,7 @@ class BeverageScreenView extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(15.0),
-                          child: Text("${viewModel.subtitle}",
+                          child: Text("${category.subtitle}",
                               style: GoogleFonts.montserrat(
                                   color: Colors.white, fontSize: ScreenUtil().setSp(20))),
                         ),
@@ -139,7 +139,7 @@ class BeverageScreenView extends StatelessWidget {
                                           i++)
                                         StaggeredTile.count(1, 1.39),
                                     ],
-                                    children: viewModel.foodDetails.map((f) {
+                                    children: viewModel.foodDetails.map((food) {
                                       return GestureDetector(
                                           child: Padding(
                                             padding: const EdgeInsets.only(left:16.0,right: 16.0),
@@ -158,7 +158,7 @@ class BeverageScreenView extends StatelessWidget {
                                                       decoration: BoxDecoration(
                                                           borderRadius: BorderRadius.circular(10),
                                                           image: DecorationImage(
-                                                              image: NetworkImage(f.get('image')),
+                                                              image: NetworkImage(food.image),
                                                               fit: BoxFit.cover)),
                                                     ),
                                                   ),
@@ -170,7 +170,7 @@ class BeverageScreenView extends StatelessWidget {
                                                         child: Column(
                                                           crossAxisAlignment: CrossAxisAlignment.start,
                                                           children: <Widget>[
-                                                            Text(f.get('name'),
+                                                            Text(food.name,
                                                               textAlign: TextAlign.start,
                                                               style: GoogleFonts.montserrat(
                                                                   color: Colors.white,
@@ -180,7 +180,7 @@ class BeverageScreenView extends StatelessWidget {
                                                             SizedBox(
                                                               height: ScreenUtil().setHeight(5)
                                                             ),
-                                                            Text('\$${f.get('sizeAndPrice')['regular']}',
+                                                            Text('\$${food.SAP[0].price}',
                                                               textAlign:
                                                                   TextAlign
                                                                       .start,
@@ -204,7 +204,7 @@ class BeverageScreenView extends StatelessWidget {
                                           onTap: () {
                                             Navigator.push(context,
                                                 MaterialPageRoute(builder: (context) {
-                                                  return ItemDetailScreenView(f, viewModel);
+                                                  return ItemDetailScreenView(food, viewModel);
                                                 }));
                                           });
                                     }).toList(),
