@@ -20,8 +20,6 @@ class MenuScreenView extends StatefulWidget {
 
 class _MenuScreenViewState extends State<MenuScreenView> {
 
-//  List categories = [];
-//  List values = [];
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<MenuScreenViewModel>.reactive(
@@ -211,18 +209,5 @@ class _MenuScreenViewState extends State<MenuScreenView> {
       },
       viewModelBuilder: () => MenuScreenViewModel(),
     );
-  }
-
-  @override
-  void initState() {
-    if(widget.restaurant!=null){
-//      Map DBcategories = Map.from(widget.restaurant.get('categories'));
-//      DBcategories.forEach((key, value) {
-//        values.add(value);
-//        setState(() {
-//          categories.add(key);
-//        });
-//      });
-    }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:FoodApp/Models/FoodItem.dart';
 import 'package:FoodApp/Models/NutritionalInfo.dart';
 import 'package:FoodApp/Models/sizeAndPrice.dart';
+import 'package:FoodApp/core/Services/FirebaseServices.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:logger/logger.dart';
 import 'package:stacked/stacked.dart';
@@ -41,8 +42,9 @@ class BeverageScreenViewModel extends BaseViewModel {
   }
 
   void getFoods() {
+
     foods.forEach((element) {
-      FirebaseFirestore.instance.collection('FoodItems').doc(element).get().then((value){
+      FirebaseServices.getDocFromCollection('FoodItems', element).then((value){
 
         Map sizeAndPrices = value.get('sizeAndPrice');
         List<sizeAndPrice> SAP = [];

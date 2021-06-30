@@ -1,4 +1,5 @@
 import 'package:FoodApp/Models/FoodItem.dart';
+import 'package:FoodApp/core/Services/Utility.dart';
 import 'package:FoodApp/theme/css.dart';
 import 'package:FoodApp/views/beverage_screen/beverage_screen_view_model.dart';
 import 'package:FoodApp/widgets/smart_widgets/pickup_button.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
+import '../../Globals.dart';
 import 'item_detail_screen_view_model.dart';
 import 'package:FoodApp/Globals.dart';
 

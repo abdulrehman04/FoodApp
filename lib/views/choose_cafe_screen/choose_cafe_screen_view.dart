@@ -1,4 +1,5 @@
 import 'package:FoodApp/Globals.dart';
+import 'package:FoodApp/core/Services/Utility.dart';
 import 'package:FoodApp/views/time_screen/time_screen_view.dart';
 import 'package:FoodApp/widgets/smart_widgets/location_card.dart';
 import 'package:FoodApp/widgets/smart_widgets/order_button.dart';
@@ -90,7 +91,7 @@ class ChooseCafeScreenView extends StatelessWidget {
                         children: restaurants.map<Widget>((e){
                           return LocationCard(
                             title: e.name,
-                            subtitle: "${getDistance(e.lat, e.lng)} mi - ${e.address}",
+                            subtitle: "${Utility.getDistance(e.lat, e.lng)} mi - ${e.address}",
                             check: false,
                             onpressed: () {
                               currentOrder.restaurantId = e.id;
@@ -159,9 +160,3 @@ class ChooseCafeScreenView extends StatelessWidget {
   }
 }
 
-
-getDistance(double lat, double long) {
-  Distance distance = new Distance();
-  double miles = distance.as(LengthUnit.Mile, new LatLng(currentPosition.latitude,currentPosition.longitude),new LatLng(lat, long));
-  return miles;
-}

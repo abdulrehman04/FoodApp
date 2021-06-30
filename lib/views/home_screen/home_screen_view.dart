@@ -1,5 +1,6 @@
 import 'package:FoodApp/Globals.dart';
 import 'package:FoodApp/Models/Order.dart';
+import 'package:FoodApp/core/Services/LocationServices.dart';
 import 'package:FoodApp/theme/css.dart';
 import 'package:FoodApp/views/time_screen/time_screen_view.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -165,7 +166,7 @@ class HomeScreenView extends StatelessWidget {
                           onTap: () async {
                             currentOrder = Order();
                             getNearbyRestaurants();
-                            if((await Geolocator().isLocationServiceEnabled())){
+                            if((await LocationServices.LocationEnabled())){
                               viewModel.showDialog(context);
                             }
                           },
@@ -194,7 +195,7 @@ class HomeScreenView extends StatelessWidget {
                           onTap: () async {
                             currentOrder = Order();
                             getNearbyRestaurants();
-                            if((await Geolocator().isLocationServiceEnabled())){
+                            if((await LocationServices.LocationEnabled())){
                               viewModel.showDialog(context);
                             }
                           },

@@ -1,4 +1,6 @@
 import 'package:FoodApp/Models/cartItem.dart';
+import 'package:FoodApp/core/Services/FirebaseServices.dart';
+import 'package:FoodApp/core/Services/Utility.dart';
 import 'package:FoodApp/theme/css.dart';
 import 'package:FoodApp/views/beverage_screen/beverage_screen_view_model.dart';
 import 'package:FoodApp/widgets/smart_widgets/order_option.dart';
@@ -159,15 +161,12 @@ class CartScreenViewModel extends BaseViewModel {
   }
 
   void checkOut(BuildContext context) {
-//    var json= jsonEncode(currentOrder);
-//    print(json);
-//    print(jsonDecode(json));
     currentOrder.from = currentUser;
     currentOrder.cart = cart;
-    FirebaseFirestore.instance.collection('Orders').add(currentOrder.toJson()).then((value){
-      FirebaseFirestore.instance.collection('Users').doc(currentUser).update({
+    FirebaseServices.pushDataToCollection('Orders', currentOrder.toJson()).then((value){
+      FirebaseServices.updateDocOnCollection('Users', currentUser, {
         'myOrders':FieldValue.arrayUnion([value.id]),
-      }).then((value){
+      }).then((_){
         showSnack(context, 'Order was successfully placed');
         Navigator.pop(context);
         Navigator.pop(context);
